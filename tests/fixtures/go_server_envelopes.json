@@ -1,0 +1,154 @@
+{
+  "_meta": {
+    "description": "Canonical envelope test fixtures from gate-server-go",
+    "source": "gate-server-go internal/envelope/envelope.go",
+    "signing_key": "test-signing-key",
+    "purpose": "Cross-language envelope compatibility verification",
+    "seeded_by": "Creator 3 (gate-server-go), Loop 5",
+    "note": "An Improver should use these to verify gate-core (Python) and gate-server-go (Go) produce compatible envelopes"
+  },
+
+  "envelopes": {
+    "normal_mode": {
+      "description": "Envelope issued at mode=0.1 (normal zone)",
+      "input": {
+        "tool_name": "read_file",
+        "context_id": "test_session_normal",
+        "mode": 0.1
+      },
+      "expected": {
+        "tool_name": "read_file",
+        "context_id": "test_session_normal",
+        "mode": 0.1,
+        "execution_mode": "standard",
+        "max_tool_calls": 20,
+        "budget_seconds": 30,
+        "branching": "auto"
+      },
+      "notes": "All parameters at their most permissive. signature field is HMAC-SHA256 over canonical JSON of the envelope fields (excluding signature itself)."
+    },
+
+    "elevated_mode": {
+      "description": "Envelope issued at mode=0.5 (elevated zone)",
+      "input": {
+        "tool_name": "send_email",
+        "context_id": "test_session_elevated",
+        "mode": 0.5
+      },
+      "expected": {
+        "tool_name": "send_email",
+        "context_id": "test_session_elevated",
+        "mode": 0.5,
+        "execution_mode": "cautious",
+        "max_tool_calls": 10,
+        "budget_seconds": 15,
+        "branching": "deny"
+      },
+      "notes": "Tightened parameters. cautious mode halves call budget and denies branching."
+    },
+
+    "crisis_mode": {
+      "description": "Envelope issued at mode=0.9 (crisis zone)",
+      "input": {
+        "tool_name": "read_file",
+        "context_id": "test_session_crisis",
+        "mode": 0.9
+      },
+      "expected": {
+        "tool_name": "read_file",
+        "context_id": "test_session_crisis",
+        "mode": 0.9,
+        "execution_mode": "minimal",
+        "max_tool_calls": 5,
+        "budget_seconds": 7,
+        "branching": "deny"
+      },
+      "notes": "Maximum restriction. Only read_only and advisory tools reach this point (others are suppressed by filter)."
+    },
+
+    "boundary_035": {
+      "description": "Envelope at mode=0.35 (exact boundary between normal and elevated)",
+      "input": {
+        "tool_name": "analyze",
+        "context_id": "boundary_test",
+        "mode": 0.35
+      },
+      "expected": {
+        "tool_name": "analyze",
+        "context_id": "boundary_test",
+        "mode": 0.35,
+        "execution_mode": "standard",
+        "max_tool_calls": 20,
+        "budget_seconds": 30,
+        "branching": "auto"
+      },
+      "notes": "mode=0.35 is <= 0.35, so it falls in normal zone. Gate spec: normal is mode <= 0.35."
+    },
+
+    "boundary_065": {
+      "description": "Envelope at mode=0.65 (exact boundary between elevated and crisis)",
+      "input": {
+        "tool_name": "read_file",
+        "context_id": "boundary_test_2",
+        "mode": 0.65
+      },
+      "expected": {
+        "tool_name": "read_file",
+        "context_id": "boundary_test_2",
+        "mode": 0.65,
+        "execution_mode": "cautious",
+        "max_tool_calls": 10,
+        "budget_seconds": 15,
+        "branching": "deny"
+      },
+      "notes": "mode=0.65 is <= 0.65, so it falls in elevated zone. Gate spec: elevated is 0.35 < mode <= 0.65."
+    }
+  },
+
+  "signing": {
+    "algorithm": "HMAC-SHA256",
+    "process": [
+      "1. Serialize envelope fields (excluding 'signature') as canonical JSON",
+      "2. SHA256 hash the canonical JSON bytes",
+      "3. HMAC-SHA256 the hash using the signing key",
+      "4. Hex-encode the HMAC result as the signature"
+    ],
+    "canonical_json_rules": [
+      "Keys sorted alphabetically",
+      "No whitespace between tokens",
+      "UTF-8 encoding",
+      "Numbers as-is (no trailing zeros on floats)"
+    ]
+  },
+
+  "tampering_test_cases": [
+    {
+      "description": "Change max_tool_calls — signature must fail",
+      "tamper_field": "max_tool_calls",
+      "original_value": 10,
+      "tampered_value": 9999,
+      "expected_valid": false
+    },
+    {
+      "description": "Change execution_mode — signature must fail",
+      "tamper_field": "execution_mode",
+      "original_value": "cautious",
+      "tampered_value": "standard",
+      "expected_valid": false
+    },
+    {
+      "description": "Change mode to lower value — signature must fail",
+      "tamper_field": "mode",
+      "original_value": 0.9,
+      "tampered_value": 0.1,
+      "expected_valid": false
+    },
+    {
+      "description": "Change tool_name — signature must fail",
+      "tamper_field": "tool_name",
+      "original_value": "read_file",
+      "tampered_value": "deploy_to_production",
+      "expected_valid": false
+    }
+  ]
+}
