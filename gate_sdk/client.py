@@ -220,7 +220,7 @@ class GateClient:
         if tool_name not in result.visible_names:
             raise ValueError(
                 f"Tool '{tool_name}' is suppressed at mode {m} "
-                f"(zone: {result.mode_status}). Cannot authorize."
+                f"(zone: {result.mode_zone}). Cannot authorize."
             )
         tool = next(t for t in result.visible if t.name == tool_name)
         return build_envelope(

@@ -65,7 +65,7 @@ print("=" * 60)
 
 for mode in [0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 0.3, 0.0]:
     result = client.filter(mode)
-    status = result.mode_status.upper()
+    status = result.mode_zone.upper()
     print(f"\n  mode={mode:.1f} [{status:8s}] visible={len(result.visible)} suppressed={len(result.suppressed)}")
     if result.suppressed:
         print(f"    blocked: {', '.join(result.suppressed_names)}")

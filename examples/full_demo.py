@@ -78,7 +78,7 @@ def audit_middleware(mode, result):
     """Log every filter decision for compliance."""
     audit_log.append({
         "mode": mode,
-        "zone": result.mode_status,
+        "zone": result.mode_zone,
         "visible": result.visible_names,
         "suppressed": result.suppressed_names,
     })
@@ -118,7 +118,7 @@ for mode, description in scenarios:
     result = client.filter(mode)
 
     print(f"\n{'-' * 60}")
-    print(f"  MODE {mode:.1f} | {result.mode_status.upper()} | {description}")
+    print(f"  MODE {mode:.1f} | {result.mode_zone.upper()} | {description}")
     print(f"{'-' * 60}")
     print(f"  Available ({len(result.visible)}):")
     for t in result.visible:

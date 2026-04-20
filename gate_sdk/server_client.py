@@ -107,7 +107,7 @@ def filter_result_from_server(response: dict[str, Any]) -> dict[str, Any]:
         "visible": response.get("visible", []),
         "suppressed": response.get("suppressed", []),
         "mode": response.get("mode", 0.0),
-        "mode_status": response.get("mode_status", "normal"),
+        "mode_zone": response.get("mode_zone", "normal"),
         "thresholds": response.get("thresholds", {}),
     }
 

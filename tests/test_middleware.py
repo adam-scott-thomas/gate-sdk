@@ -24,7 +24,7 @@ def test_middleware_can_modify_result():
     def strip_all(mode, result):
         return ToolFilter(
             visible=(), suppressed=result.visible + result.suppressed,
-            mode=result.mode, mode_status="lockdown",
+            mode=result.mode, mode_zone="lockdown",
             thresholds=result.thresholds,
         )
 
@@ -33,7 +33,7 @@ def test_middleware_can_modify_result():
     client.use(strip_all)
     result = client.filter()
     assert len(result.visible) == 0
-    assert result.mode_status == "lockdown"
+    assert result.mode_zone == "lockdown"
 
 
 def test_on_suppress_fires():

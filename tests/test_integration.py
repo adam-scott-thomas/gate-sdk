@@ -71,9 +71,9 @@ def test_tools_to_server_payload():
 
 
 def test_filter_result_from_server():
-    raw = {"visible": [{"name": "a"}], "suppressed": [], "mode": 0.2, "mode_status": "normal"}
+    raw = {"visible": [{"name": "a"}], "suppressed": [], "mode": 0.2, "mode_zone": "normal"}
     parsed = filter_result_from_server(raw)
-    assert parsed["mode_status"] == "normal"
+    assert parsed["mode_zone"] == "normal"
     assert len(parsed["visible"]) == 1
 
 
@@ -102,7 +102,7 @@ def test_policy_middleware_refilters_at_stricter_mode():
     assert "read_file" in result.visible_names
     assert "deploy" in result.suppressed_names
     assert "write_file" in result.suppressed_names
-    assert result.mode_status == "crisis"
+    assert result.mode_zone == "crisis"
 
 
 def test_policy_middleware_passthrough_when_lax():

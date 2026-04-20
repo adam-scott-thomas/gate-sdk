@@ -38,7 +38,7 @@ def main() -> None:
         print(f"--- {zone_name.upper()} (mode={mode}) ---")
         print(f"  Visible:    {result.visible_names}")
         print(f"  Suppressed: {result.suppressed_names}")
-        print(f"  Zone:       {result.mode_status}")
+        print(f"  Zone:       {result.mode_zone}")
         print()
 
     # Context manager demo

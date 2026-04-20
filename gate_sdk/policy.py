@@ -83,6 +83,6 @@ class PolicyMiddleware:
             visible=tuple(new_visible),
             suppressed=tuple(new_suppressed),
             mode=policy_mode,
-            mode_status=zone,
+            mode_zone=zone,
             thresholds=result.thresholds,
         )
