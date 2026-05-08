@@ -3,7 +3,7 @@ requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "gate-sdk-one"
+name = "sdkgate"
 version = "0.1.1"
 description = "Developer SDK for Maelstrom Gate — tool access control for AI agents"
 readme = "README.md"
