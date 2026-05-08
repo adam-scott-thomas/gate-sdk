@@ -3,14 +3,14 @@ requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "gate-sdk"
-version = "0.1.0"
+name = "gate-sdk-one"
+version = "0.1.1"
 description = "Developer SDK for Maelstrom Gate — tool access control for AI agents"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "Apache-2.0"}
 dependencies = [
-    "gate-keeper>=1.0.0",
+    "gatekeeper-one>=1.0.0",
 ]
 
 [project.optional-dependencies]
