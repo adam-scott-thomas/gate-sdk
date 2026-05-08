@@ -27,7 +27,7 @@ def main() -> None:
         ("crisis",   0.9),
     ]
 
-    print("Maelstrom Gate SDK Demo")
+    print("Gatekeeper SDK Demo")
     print("=" * 50)
     print(f"Registered tools: {[t.name for t in client.tools]}")
     print()

@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from typing import Any, Protocol
 
-from maelstrom_gate import ToolFilter
+from gatekeeper import ToolFilter
 
 
 class PolicyEngine(Protocol):
@@ -61,7 +61,7 @@ class PolicyMiddleware:
         the result is re-filtered at the stricter level. This ensures
         policy always wins over the ambient mode signal.
         """
-        from maelstrom_gate.core import is_suppressed, T_DOWN, T_UP
+        from gatekeeper.core import is_suppressed, T_DOWN, T_UP
 
         policy_mode = self._engine.evaluate(self._context)
         if policy_mode <= mode:

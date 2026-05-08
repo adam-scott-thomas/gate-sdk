@@ -12,7 +12,7 @@ Tests for:
 - Authorize edge cases
 """
 from gate_sdk import GateClient
-from maelstrom_gate import ToolFilter
+from gatekeeper import ToolFilter
 import pytest
 
 

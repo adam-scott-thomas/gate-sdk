@@ -1,4 +1,4 @@
-"""Gate SDK — developer-facing integration layer for Maelstrom Gate.
+"""Gate SDK — developer-facing integration layer for Gatekeeper.
 
 Depends on: maelstrom-gate (gate-core, Layer 0)
 Used by: policy engines (Layer 2), dashboards (Layer 3), examples (Layer 3)

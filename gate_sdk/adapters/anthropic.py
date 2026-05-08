@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from maelstrom_gate import Tool
+from gatekeeper import Tool
 
 _DEFAULT_CLASS = "state_mutation"
 

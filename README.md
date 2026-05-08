@@ -4,7 +4,7 @@
 [![tests](https://img.shields.io/badge/tests-48_passing-brightgreen)]()
 [![license](https://img.shields.io/badge/license-Apache_2.0-green)]()
 
-> Developer SDK for Maelstrom Gate — tool access control for AI agents.
+> Developer SDK for Gatekeeper — tool access control for AI agents.
 
 `GateClient` is the thing you import. Register tools with execution classes,
 set a mode (or wire a signal source), call `filter()` before every agent turn,
@@ -101,8 +101,8 @@ failure injection.
 
 ## How it fits
 
-Layer 1 (transport) in [Maelstrom Gate](https://github.com/adam-scott-thomas/maelstrom-gate).
-Depends on `maelstrom-gate` (Layer 0). Feeds `gate-policy` (Layer 2) and
+Layer 1 (transport) in [Gatekeeper](https://github.com/adam-scott-thomas/gate-keeper).
+Depends on `gate-keeper` (Layer 0). Feeds `gate-policy` (Layer 2) and
 `gate-compliance` (Layer 2) via middleware hooks.
 
 ## License

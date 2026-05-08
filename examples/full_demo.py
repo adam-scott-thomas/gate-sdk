@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Maelstrom Gate SDK -- Full Demo
+"""Gatekeeper SDK -- Full Demo
 
 An AI coding assistant has 8 tools. Watch what happens as the
 threat level rises from calm to crisis.

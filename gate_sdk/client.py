@@ -13,7 +13,7 @@ from __future__ import annotations
 from contextlib import contextmanager
 from typing import Any, Protocol, Callable
 
-from maelstrom_gate import Gate, Tool, ToolFilter, AuthorizationEnvelope, build_envelope, verify_envelope
+from gatekeeper import Gate, Tool, ToolFilter, AuthorizationEnvelope, build_envelope, verify_envelope
 
 
 FilterHook = Callable[[float, ToolFilter], ToolFilter]
@@ -42,7 +42,7 @@ class _StaticMode:
 
 
 class GateClient:
-    """High-level SDK client for Maelstrom Gate.
+    """High-level SDK client for Gatekeeper.
 
     Usage:
         client = GateClient(mode=0.0)

@@ -19,7 +19,7 @@ def test_middleware_runs():
 
 def test_middleware_can_modify_result():
     """Middleware can swap the result — used for custom filtering logic."""
-    from maelstrom_gate import ToolFilter
+    from gatekeeper import ToolFilter
 
     def strip_all(mode, result):
         return ToolFilter(

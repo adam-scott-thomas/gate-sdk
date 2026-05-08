@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from maelstrom_gate import Tool
+from gatekeeper import Tool
 
 
 # Map OpenAI-style hints to Gate execution classes.
